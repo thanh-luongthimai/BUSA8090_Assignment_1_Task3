@@ -1,0 +1,14 @@
+Q2)
+a) iii) select LastName, FirstName, MemberID from Member where Coach is NULL;
+b) iii) SELECT LastName, FirstName, MemberID FROM Member WHERE year(JoinDate) =2013;
+c) iii) 
+select distinct m.MemberID, m.LastName, m.FirstName 
+from Member m, Entry e 
+where m.MemberID=e.MemberID 
+and m.MemberID not in (
+select m.MemberID from Member m, Entry e where m.MemberID=e.MemberID and e.Year=2013);
+
+d) ii)
+create view years as select distinct Year from Entry;
+select m.MemberID, m.LastName, m.FirstName from Member m where not exists (select * from years y where not exists (select * from Entry e where m.MemberID=e.MemberID and e.Year=y.Year));
+
